@@ -17,8 +17,7 @@ function formatPrice (price) {
     return price
   }
   price = String(price)
-  const intPart = /\./.test(price) ? price.split('.')[0] : price
-  const intPrice = intPart.match(/\d*/g).join('')
+  const intPrice = price.match(/\d+/)[0]
   const HOLDER = 'HOLDER'
   const holder = price.replace(intPrice, HOLDER)
   const intPriceArr = intPrice.split('').reverse()
@@ -33,6 +32,22 @@ function formatPrice (price) {
   })
   return holder.replace(HOLDER, res)
 }
+
+// function formatPrice (value) {
+//   if (!value) {
+//     return 0
+//   }
+//   if (/,/.test(value)) {
+//     return value
+//   }
+//   value = String(value)
+//   const reg = /\d+\.?\d*/
+//   const HOLDER = 'HOLDER'
+//   const price = value.match(reg)[0]
+//   const holder = value.replace(price, HOLDER)
+//   value = holder.replace(HOLDER, Number(price).toLocaleString())
+//   return value
+// }
 
 console.log(formatPrice(2689999))
 console.log(formatPrice('2689999'))
